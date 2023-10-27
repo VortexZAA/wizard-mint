@@ -12,15 +12,27 @@ export const callMint = async () => {
     
         console.error("Error during minting:", err);
     
+        // Check for user rejection
         if (err.code === 'ACTION_REJECTED') {
             alert('Transaction was rejected by the user.');
-        } else {
+        } 
+        // Check for revert reason: "You have already minted an artwork."
+        else if (err.message && err.message.includes('You have already minted an artwork')) {
             alert('You have already minted a scroll.');
+        }
+        // Check for insufficient funds
+        else if (err.message && err.message.includes('insufficient funds')) {
+            alert('You do not have enough ETH in your account to mint.');
+        }
+        // Generic error message for other cases
+        else {
+            alert('There was an error during the minting process. Please check your eth balance and try again.');
         }
     
         throw err; 
     }
 };
+
 
 export const callTokenURI = async (id: number) => {
     try {
