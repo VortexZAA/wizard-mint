@@ -1,6 +1,9 @@
+import connect from "@/hook/connect";
+import { ethers } from "ethers";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+
 export default function Home() {
   const [random, setRandom] = useState({
     top: 0,
@@ -11,25 +14,7 @@ export default function Home() {
     "Enter, traveler, into my realm. Should you desire to wield powers most extraordinary, I have 48 different power scrolls. If you want to have one, a mere gesture towards my essence is all that is required. Click, and behold the wonders that await. P.S. Use them with wisdom, for such artifacts demand great responsibility.";
   const typeRef: any = useRef(null);
 
-  const isconneted = false;
-  /* useEffect(() => {
-    let time = 700;
-
-    setInterval(() => {
-       //random coordinat number between 1 and 100
-       const random = Math.floor(Math.random() * 80) + 1;
-       //random coordinat number between 1 and 100
-       const random2 = Math.floor(Math.random() * 70) + 1;
-      setRandom({
-        top: random,
-        right: random2,
-      });
-      console.log(random, random2);
-    }, time);
-    return () => {
-      clearInterval(time);
-    };
-  }, []); */
+  const [isconneted, setIsConnected] = useState(false);
   const incrementRandom = () => {
     //random coordinat number between 1 and 100
     const random = Math.floor(Math.random() * 80) + 1;
@@ -41,10 +26,16 @@ export default function Home() {
     });
   };
 
+  async function connectWallet() {
+    const address:any = await connect();
+    if (address) {
+      setIsConnected(true)
+    }
+    //alert(address);
+  }
+
   useEffect(() => {
     const timer = setTimeout(incrementRandom, 1000);
-    //@ts-ignore
-    console.log(typeRef?.current?.innerHTML.length === text.length);
 
     typeRef?.current?.innerHTML.length === text.length &&
       setTimeout(()=>setShowText(false), 2000);
@@ -70,8 +61,8 @@ export default function Home() {
             omitDeletionAnimation={true}
           />
         </h1>
-      ) : (
-        <button className=" rounded-md p-6 bg-[url('/button.svg')] bg-no-repeat bg-contain ">
+      ) : !isconneted && (
+        <button onClick={connectWallet} className=" rounded-md p-6 bg-[url('/button.svg')] bg-no-repeat bg-contain ">
           CONNECT WALLET
         </button>
       )}
