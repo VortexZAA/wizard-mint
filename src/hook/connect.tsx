@@ -7,7 +7,7 @@ const connect = async () => {
     
     try {
       if (typeof window !== "undefined" && ethereum && ethereum.isMetaMask) {
-        const provider = new ethers.BrowserProvider(ethereum);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
         await ethereum.send("eth_requestAccounts");
 
         const signer = await provider?.getSigner();
