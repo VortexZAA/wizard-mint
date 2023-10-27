@@ -27,18 +27,21 @@ export default function Home() {
   };
 
   async function connectWallet() {
-    const address:any = await connect();
+    const address: any = await connect();
     if (address) {
-      setIsConnected(true)
+      setIsConnected(true);
     }
     //alert(address);
   }
 
+  function success() {
+    alert("You found the wizard");
+  }
   useEffect(() => {
     const timer = setTimeout(incrementRandom, 1000);
 
     typeRef?.current?.innerHTML.length === text.length &&
-      setTimeout(()=>setShowText(false), 2000);
+      setTimeout(() => setShowText(false), 2000);
     return () => clearTimeout(timer);
   }, [random]);
 
@@ -61,17 +64,20 @@ export default function Home() {
             omitDeletionAnimation={true}
           />
         </h1>
-      ) : !isconneted && (
-        <button onClick={connectWallet} className=" rounded-md p-6 bg-[url('/button.svg')] bg-no-repeat bg-contain ">
-          CONNECT WALLET
-        </button>
+      ) : (
+        !isconneted && (
+          <button
+            onClick={connectWallet}
+            className=" rounded-md p-6 bg-[url('/button.svg')] bg-no-repeat bg-contain "
+          >
+            CONNECT WALLET
+          </button>
+        )
       )}
 
       <button
         className="absolute w-28 bg-[url('/wizard.gif')] h-28 bg-contain bg-no-repeat z-10 "
-        onClick={() => {
-          alert("You found the wizard");
-        }}
+        onClick={success}
         style={{
           right: `${isconneted ? random.top : 45}%`,
           top: `${isconneted ? random.right : 45}%`,
