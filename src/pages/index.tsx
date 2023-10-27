@@ -1,4 +1,4 @@
-import { callMint } from "@/contractInteractions/useappContracts";
+import { callMint, callTokenURI } from "@/contractInteractions/useappContracts";
 import connect from "@/hook/connect";
 import { ethers } from "ethers";
 import Image from "next/image";
@@ -41,14 +41,16 @@ export default function Home() {
   async function success() {
     setLoading(true);
     try {
-      let id = await callMint();
-      alert("You found the wizard, so your prize is " + id);
-      setLoading(false);
+        let id = await callMint();
+        let uri = await callTokenURI(id);
+        alert("You found the wizard, so your prize is " + id);
+         setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error("Error minting:", error);
       alert("There was an error. Please try again.");
     }
+
   }
   useEffect(() => {
     const timer = setTimeout(incrementRandom, 1000);

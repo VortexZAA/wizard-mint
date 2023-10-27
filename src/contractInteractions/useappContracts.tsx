@@ -19,7 +19,7 @@ export const callMint = async () => {
             alert('There was an error during the minting process. Please try again.');
         }
     
-        throw err;  // Re-throwing the error if you want to handle it further up the call stack
+        throw err; 
     }
 };
 
@@ -27,6 +27,7 @@ export const callTokenURI = async (id: number) => {
     try {
         const { contractWithSigner } = await callNFTContract();
         let uri = await contractWithSigner.tokenURI(id);
+        console.log(uri);
         return uri;
     } catch (error) {
         console.error("Error during tokenURI:", error);
