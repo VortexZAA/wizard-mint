@@ -146,45 +146,6 @@ export default function Home() {
   );
 }
 
-/* async function importToMetamask(id:number, image:string) {
-  const ethereum = window.ethereum as any;
-  const userAddress = (await ethereum.request({ method: 'eth_accounts' }))[0];
-  const tokenId = id;
-
-  try {
-      // Check if MetaMask is installed and Ethereum provider is injected
-      if (typeof window.ethereum !== 'undefined' && ethereum.isMetaMask) {
-          // Use MetaMask's provider
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-          // Suggest adding the NFT to the user's MetaMask assets
-          const added = await provider.request({
-              method: 'wallet_watchAsset',
-              params: {
-                  type: 'ERC721',
-                  options: {
-                      address: "YOUR_CONTRACT_ADDRESS_HERE", // Your NFT smart contract address
-                      symbol:'WZDS',
-                      decimals: 0, // ERC721 assets are non-fungible, so decimals is always 0
-                      image: image, // A string url of the token logo (can use your NFT's metadata)
-                      tokenId: tokenId // The ID of the minted NFT
-                  },
-              },
-          });
-
-          // If successfully added, the result will be true
-          if (added) {
-              console.log('Successfully added NFT to MetaMask');
-          } else {
-              console.error('Something went wrong adding the NFT to MetaMask');
-          }
-      } else {
-          console.error('Please install MetaMask');
-      }
-  } catch (error) {
-      console.error(error);
-  }
-}  */
 async function importToMetamask(id: number,image:string) {
   const ethereum = window.ethereum as any;
 
@@ -200,7 +161,7 @@ async function importToMetamask(id: number,image:string) {
         params: {
           type: 'ERC721',
           options: {
-            address: process.env.NEXT_PUBLIC_CONTRACT_DEVELOPMENT, // Replace with your NFT smart contract address
+            address: process.env.NEXT_PUBLIC_CONTRACT, // Replace with your NFT smart contract address
             symbol: "WZDS", // Replace with a short string to represent your asset, like 'MYNFT'
             decimals: 0, // ERC721 assets are non-fungible, so decimals is always 0
             image: image, // Use the nftImage state to provide the image URL
@@ -223,26 +184,3 @@ async function importToMetamask(id: number,image:string) {
     console.error("Error importing NFT to MetaMask:", error);
   }
 }
-/* async function success() {
-  setLoading(true);
-  try {
-    let id = await callMint();
-    let uri = await callTokenURI(id);
-
-    let res = await fetch(uri.replace("ipfs://", "https://ipfs.io/ipfs/"));
-    let data = await res.json();
-    setNftImage(data.image.replace("ipfs://", "https://ipfs.io/ipfs/"));
-    setNftdata(data);
-
-    alert("You found the wizard, so your prize is " + id);
-    setLoading(false);
-
-    // Import the minted NFT to MetaMask
-    importToMetamask(id);
-
-  } catch (error) {
-    setLoading(false);
-    console.error("Error minting:", error);
-    alert("There was an error. Please try again.");
-  }
-} */
