@@ -10,6 +10,7 @@ export default function Home() {
     right: 0,
   });
   const [showText, setShowText] = useState(true);
+  const [address, setAddress] = useState("");
   const text =
     "Enter, traveler, into my realm. Should you desire to wield powers most extraordinary, I have 48 different power scrolls. If you want to have one, a mere gesture towards my essence is all that is required. Click, and behold the wonders that await. P.S. Use them with wisdom, for such artifacts demand great responsibility.";
   const typeRef: any = useRef(null);
@@ -30,12 +31,14 @@ export default function Home() {
     const address: any = await connect();
     if (address) {
       setIsConnected(true);
+      setAddress(address);
     }
     //alert(address);
   }
 
   function success() {
     alert("You found the wizard");
+
   }
   useEffect(() => {
     const timer = setTimeout(incrementRandom, 1000);
@@ -77,7 +80,7 @@ export default function Home() {
 
       <button
         className="absolute w-28 bg-[url('/wizard.gif')] h-28 bg-contain bg-no-repeat z-10 "
-        onClick={success}
+        onClick={()=> isconneted && success()}
         style={{
           right: `${isconneted ? random.top : 45}%`,
           top: `${isconneted ? random.right : 45}%`,
