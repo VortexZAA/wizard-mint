@@ -61,7 +61,6 @@ export default function Home() {
     } catch (error) {
       setLoading(false);
       console.error("Error minting:", error);
-      alert("There was an error. Please try again.");
     }
   }
   useEffect(() => {
@@ -162,14 +161,13 @@ async function importToMetamask(id: number,image:string) {
           type: 'ERC721',
           options: {
             address: process.env.NEXT_PUBLIC_CONTRACT, // Replace with your NFT smart contract address
-            symbol: "WZDS", // Replace with a short string to represent your asset, like 'MYNFT'
+            symbol: "SCROLLs", // Replace with a short string to represent your asset, like 'MYNFT'
             decimals: 0, // ERC721 assets are non-fungible, so decimals is always 0
             image: image, // Use the nftImage state to provide the image URL
             tokenId: id.toString() // Convert the tokenId to a string
           },
         },
       });
-      console.log(added);
       
       // If successfully added, the result will be true
       if (added) {

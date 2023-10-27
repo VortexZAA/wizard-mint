@@ -6,7 +6,6 @@ export const callMint = async () => {
         const { contractWithSigner } = await callNFTContract();
         let tx = await contractWithSigner.mint();
         let receipt = await tx.wait();
-        console.log(receipt);
         return receipt.events[0].args[2].toNumber();
     } catch (error) {
         const err = error as any;  // Type assertion
@@ -16,7 +15,7 @@ export const callMint = async () => {
         if (err.code === 'ACTION_REJECTED') {
             alert('Transaction was rejected by the user.');
         } else {
-            alert('There was an error during the minting process. Please try again.');
+            alert('You have already minted a scroll.');
         }
     
         throw err; 
@@ -27,7 +26,6 @@ export const callTokenURI = async (id: number) => {
     try {
         const { contractWithSigner } = await callNFTContract();
         let uri = await contractWithSigner.tokenURI(id);
-        console.log(uri);
         return uri;
     } catch (error) {
         console.error("Error during tokenURI:", error);
