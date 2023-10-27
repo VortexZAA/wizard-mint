@@ -1,1 +1,3 @@
 # wizard-mint
+
+ekranın ortasında duran index.html dosyasının içerisinde bir "gif" var. Sayfa açıldığında yukarıdan benim belirlediğim ama şimdilik örnek olan bir metin yavaş yavaş daktiloda yazılır gibi yazılmaya başlanacak daha sonra ise yazı bitince ekrandan gidecek onun yerine ekrana connect metamask butonu gelecek. Bu butonla metamask'a bağlandıktan sonra buton kaybolacak ve ortada bulunan gif ekranda rastgele noktalara belirli bir süre ile hızlıca teleport olacak. Ve bu gifin teleport sürekli devam edecek ama eğer bu teleport esnasında gif'e tıklanırsa nft mint edilmesi için bir pop-up gelecek.
